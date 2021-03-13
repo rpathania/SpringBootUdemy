@@ -4,10 +4,7 @@ import com.trp.BeerServiceDTO.model.ConsumerModel;
 import com.trp.BeerServiceDTO.services.ConsumerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
@@ -19,14 +16,44 @@ public class ConsumerController {
 
     public ConsumerController(ConsumerService consumerService)
     {
+        System.out.println("Constructor = "+consumerService);
         this.consumerService = consumerService;
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<ConsumerModel>getCostumer(@PathVariable("userId") UUID userId){
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void getCostumer(@PathVariable("userId") UUID userId){
         System.out.println("ConsumerController.getCostumer");
         System.out.println(UUID.randomUUID());
-        return new ResponseEntity<>(consumerService.getConsumerById(userId), HttpStatus.OK);
+     //   return new ResponseEntity<>(consumerService.getConsumerById(userId), HttpStatus.OK);
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void handlePost(ConsumerModel consumerModel){
+
+        System.out.println("In post request");
+
+        consumerService.saveObj(consumerModel);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void handlePut(@PathVariable("id") UUID id,ConsumerModel consumerModel){
+
+        System.out.println("In put request");
+
+        consumerService.updateObj(id,consumerModel);
+
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void handleDelete(@PathVariable("id") UUID id){
+
+        System.out.println("In delete request");
+        consumerService.deleteObj(id);
+    }
+
 
 }

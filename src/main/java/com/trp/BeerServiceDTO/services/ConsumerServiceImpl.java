@@ -14,4 +14,19 @@ public class ConsumerServiceImpl implements ConsumerService {
                 .name("Rishi")
                 .build();
     }
+
+    @Override
+    public void saveObj(ConsumerModel consumerModel) {
+        System.out.println("Saving the object");
+    }
+
+    @Override
+    public void updateObj(UUID id, ConsumerModel consumerModel) {
+        System.out.println("Updating the object");
+    }
+
+    @Override
+    public void deleteObj(UUID id) {
+        System.out.println("Deleting the object");
+    }
 }

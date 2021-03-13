@@ -30,7 +30,7 @@ public class ConsumerController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void handlePost(ConsumerModel consumerModel){
+    public void handlePost(@RequestBody  ConsumerModel consumerModel){
 
         System.out.println("In post request");
 
@@ -39,7 +39,7 @@ public class ConsumerController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void handlePut(@PathVariable("id") UUID id,ConsumerModel consumerModel){
+    public void handlePut(@PathVariable("id") UUID id, @RequestBody  ConsumerModel consumerModel){
 
         System.out.println("In put request");
 
